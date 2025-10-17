@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Free Agents ({{ pos }})</h2>
+<form method="get">
+  <label>Position:
+    <select name="pos" onchange="this.form.submit()">
+      <option value="">ALL</option>
+      {% for p in ["QB","RB","WR","TE","K","D/ST"] %}
+      <option value="{{p}}" {% if pos==p %}selected{% endif %}>{{p}}</option>
+      {% endfor %}
+    </select>
+  </label>
+</form>
+<table>
+  <thead><tr><th>Player</th><th>Pos</th><th>Team</th><th>Proj</th></tr></thead>
+  <tbody>
+    {% for p in players %}
+      <tr><td>{{ p.name }}</td><td>{{ p.pos }}</td><td>{{ p.pro_team }}</td><td>{{ p.proj }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

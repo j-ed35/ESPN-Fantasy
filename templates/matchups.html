@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Current Matchups</h2>
+<table>
+  <thead><tr><th>Home</th><th>Score</th><th>Away</th><th>Score</th></tr></thead>
+  <tbody>
+    {% for m in matchups %}
+      <tr><td>{{ m.home }}</td><td>{{ m.home_score }}</td><td>{{ m.away }}</td><td>{{ m.away_score }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

@@ -1,22 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Free Agents ({{ pos }})</h2>
-<form method="get">
-  <label>Position:
-    <select name="pos" onchange="this.form.submit()">
-      <option value="">ALL</option>
-      {% for p in ["QB","RB","WR","TE","K","D/ST"] %}
-      <option value="{{p}}" {% if pos==p %}selected{% endif %}>{{p}}</option>
-      {% endfor %}
-    </select>
-  </label>
-</form>
-<table>
-  <thead><tr><th>Player</th><th>Pos</th><th>Team</th><th>Proj</th></tr></thead>
-  <tbody>
-    {% for p in players %}
-      <tr><td>{{ p.name }}</td><td>{{ p.pos }}</td><td>{{ p.pro_team }}</td><td>{{ p.proj }}</td></tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="page-header">
+  <h1>🔄 Waiver Wire</h1>
+  <p>Available free agents - {{ pos }}</p>
+</div>
+
+<div class="filters">
+  <div class="filter-group">
+    <label for="position">Filter by Position:</label>
+    <form method="get" style="display: inline;">
+      <select name="pos" onchange="this.form.submit()">
+        <option value="">ALL</option>
+        {% for p in ["QB","RB","WR","TE","K","D/ST"] %}
+        <option value="{{p}}" {% if pos==p %}selected{% endif %}>{{p}}</option>
+        {% endfor %}
+      </select>
+    </form>
+  </div>
+</div>
+
+<div class="players-grid">
+  {% for player in players %}
+  <div class="player-card">
+    <div class="player-info">
+      <h4>{{ player.name }}</h4>
+      <div class="player-details">{{ player.pro_team }}</div>
+    </div>
+    <div style="display: flex; align-items: center;">
+      <span class="position-badge">{{ player.pos }}</span>
+      {% if player.proj %}
+      <span class="projection">{{ "%.1f"|format(player.proj) }} pts</span>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+{% if not players %}
+<div class="card" style="text-align: center;">
+  <h3>No players found</h3>
+  <p>Try adjusting your position filter or check back later.</p>
+</div>
+{% endif %}
 {% endblock %}

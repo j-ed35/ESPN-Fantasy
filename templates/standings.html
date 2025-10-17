@@ -1,12 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Standings</h2>
-<table>
-  <thead><tr><th>Team</th><th>W</th><th>L</th><th>PF</th></tr></thead>
-  <tbody>
-    {% for r in rows %}
-      <tr><td>{{ r.team }}</td><td>{{ r.wins }}</td><td>{{ r.losses }}</td><td>{{ r.points_for }}</td></tr>
-    {% endfor %}
-  </tbody>
-</table>
+<div class="page-header">
+  <h1>📊 League Standings</h1>
+  <p>Current season rankings and performance</p>
+</div>
+
+<div class="table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Team</th>
+        <th>Record</th>
+        <th>Points For</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in rows %}
+      <tr>
+        <td><strong>#{{ loop.index }}</strong></td>
+        <td>{{ row.team }}</td>
+        <td>
+          <span class="record">{{ row.wins }}-{{ row.losses }}</span>
+        </td>
+        <td><strong>{{ "%.1f"|format(row.points_for) }}</strong></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
 {% endblock %}

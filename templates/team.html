@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="team-container">
+  <h2>{{ team_name }} - Performance</h2>
+  
+  <div class="week-selector">
+    <label for="week-range">View last:</label>
+    <select id="week-range">
+      <option value="1">1 Week</option>
+      <option value="3">3 Weeks</option>
+      <option value="4">4 Weeks</option>
+      <option value="8">8 Weeks</option>
+      <option value="17">Full Season</option>
+    </select>
+    <button onclick="updateTeamStats()">Update</button>
+  </div>
+
+  <div class="stats-section">
+    <h3>Air Yards by Week</h3>
+    <table>
+      <thead>
+        <tr id="air-yards-header"></tr>
+      </thead>
+      <tbody>
+        <tr id="air-yards-data"></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="stats-section">
+    <h3>Snap Count Percentages by Week</h3>
+    <table>
+      <thead>
+        <tr id="snap-counts-header"></tr>
+      </thead>
+      <tbody>
+        <tr id="snap-counts-data"></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  let allStats = {{ stats | tojson }};
+  
+  function updateTeamStats() {
+    const weeks = document.getElementById('week-range').value;
+    window.location.href = `?weeks=${weeks}`;
+  }
+  
+  function renderTable() {
+    // Parse and display stats based on week selection
+    const airYardsHeader = document.getElementById('air-yards-header');
+    const airYardsData = document.getElementById('air-yards-data');
+    
+    if (allStats.air_yards.length > 0) {
+      Object.keys(allStats.air_yards[0]).forEach(key => {
+        const th = document.createElement('th');
+        th.textContent = key;
+        airYardsHeader.appendChild(th);
+        
+        const td = document.createElement('td');
+        td.textContent = allStats.air_yards[0][key];
+        airYardsData.appendChild(td);
+      });
+    }
+  }
+  
+  document.addEventListener('DOMContentLoaded', renderTable);
+</script>
+{% endblock %}

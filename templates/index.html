@@ -1,5 +1,42 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>{{ league }}</h1>
-  <p>Welcome to your custom league site.</p>
+<div class="page-header">
+  <h1>🏈 {{ league }}</h1>
+  <p>Your ultimate fantasy football command center</p>
+</div>
+
+<div class="card">
+  <h2>Welcome to Your League</h2>
+  <p>Navigate through your league using the menu above to check standings, view matchups, explore teams, and browse the waiver wire.</p>
+  
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem;">
+    <a href="/standings" style="text-decoration: none;">
+      <div style="background: #667eea; color: white; padding: 2rem; border-radius: 12px; text-align: center; transition: transform 0.3s ease;">
+        <h3 style="margin: 0; color: white;">📊 Standings</h3>
+        <p style="margin: 0.5rem 0 0 0; opacity: 0.9;">View current rankings</p>
+      </div>
+    </a>
+    
+    <a href="/teams" style="text-decoration: none;">
+      <div style="background: #764ba2; color: white; padding: 2rem; border-radius: 12px; text-align: center; transition: transform 0.3s ease;">
+        <h3 style="margin: 0; color: white;">👥 Teams</h3>
+        <p style="margin: 0.5rem 0 0 0; opacity: 0.9;">Explore all teams</p>
+      </div>
+    </a>
+    
+    <a href="/matchups" style="text-decoration: none;">
+      <div style="background: #48c6ef; color: white; padding: 2rem; border-radius: 12px; text-align: center; transition: transform 0.3s ease;">
+        <h3 style="margin: 0; color: white;">⚔️ Matchups</h3>
+        <p style="margin: 0.5rem 0 0 0; opacity: 0.9;">Current week battles</p>
+      </div>
+    </a>
+    
+    <a href="/waivers" style="text-decoration: none;">
+      <div style="background: #06c258; color: white; padding: 2rem; border-radius: 12px; text-align: center; transition: transform 0.3s ease;">
+        <h3 style="margin: 0; color: white;">🔄 Waivers</h3>
+        <p style="margin: 0.5rem 0 0 0; opacity: 0.9;">Free agents available</p>
+      </div>
+    </a>
+  </div>
+</div>
 {% endblock %}

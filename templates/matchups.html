@@ -1,12 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
-<h2>Current Matchups</h2>
-<table>
-  <thead><tr><th>Home</th><th>Score</th><th>Away</th><th>Score</th></tr></thead>
-  <tbody>
-    {% for m in matchups %}
-      <tr><td>{{ m.home }}</td><td>{{ m.home_score }}</td><td>{{ m.away }}</td><td>{{ m.away_score }}</td></tr>
-    {% endfor %}
-  </tbody>
-</table>
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+  <h1>⚔️ Current Matchups</h1>
+  <p>This week's head-to-head battles</p>
+</div>
+
+<div class="matchups-grid">
+  {% for matchup in matchups %}
+  <div class="matchup-card">
+    <div class="matchup">
+      <div class="team">
+        <div class="team-name">{{ matchup.away }}</div>
+        <div class="score">{{ matchup.away_score }}</div>
+      </div>
+      <div class="vs">VS</div>
+      <div class="team">
+        <div class="team-name">{{ matchup.home }}</div>
+        <div class="score">{{ matchup.home_score }}</div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
 {% endblock %}

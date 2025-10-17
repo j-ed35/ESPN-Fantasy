@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+  <h1>Teams</h1>
+  <p>Click on a team to view detailed stats</p>
+</div>
+
+<div class="teams-grid">
+  {% for team in teams %}
+    <div class="team-card">
+      <a href="/team/{{ team.team_name }}" class="team-link">
+        <div class="team-info">
+          <h3>{{ team.team_name }}</h3>
+          <div class="team-stats">
+            <span class="record">{{ team.wins }}-{{ team.losses }}</span>
+            <span class="points">{{ "%.1f"|format(team.points_for) }} PF</span>
+          </div>
+          <div class="team-owner">{{ team.owner }}</div>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}
